@@ -1,0 +1,185 @@
+<!-- <app-cabecera></app-cabecera> -->
+
+<div class="container app">
+  <div class="row">
+    <div class="col-sm-8">
+      <h1 class="text-center">
+        {{title}}
+      </h1>
+    </div>
+    <div class="col-sm-4">
+      <div class="alert alert-success alert-dismissable" *ngIf="msg">
+        <a href="#" class="close" (click)="closeAlert()">
+          &times;
+        </a>
+        {{msg}}
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <img width="200" src="https://grupo3ea.files.wordpress.com/2023/02/lamasia.png"/>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <h3 class="text-center">Creación de un Usuario</h3>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="name" class="control-label col-sm-2">
+            Username
+          </label>
+          <div class="col-sm-10">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              name="name" [(ngModel)]="model.name" 
+              placeholder="Insertar el Nombre de Usuario ...">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="position" class="control-label col-sm-2">
+            Correo
+          </label>
+          <div class="col-sm-10">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="position" 
+              name="position" [(ngModel)]="model.position" 
+              placeholder="Insertar el Correo Electrónico ...">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="office" class="control-label col-sm-2">
+            Edad
+          </label>
+          <div class="col-sm-10">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="office" 
+              name="office" [(ngModel)]="model.office" 
+              placeholder="Insertar la Edad ...">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <button
+              type="submit"
+              class="btn btn-success"
+              (click)="agregarEmployee()"
+            >
+            Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <h3 class="text-center">Tabla de Usuarios</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Correo</th>
+            <th>Edad</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees; let i = index">
+            <!--<td>{{employee._id}}</td>-->
+            <td>{{employee.name}}</td>
+            <td>{{employee.position}}</td>
+            <td>{{employee.office | slice:0:5}}</td>
+            <td>
+              <a (click)="editEmployee(i)" class="btn btn-success">
+                Edit
+              </a>
+              <a (click)="eliminarEmployee(employee._id)" class="btn btn-danger">
+                Delete
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-4" [hidden]="hideUpdate">
+      <h3 class="text-center">Update Data</h3>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="name" class="control-label col-sm-2">
+            Username
+          </label>
+          <div class="col-sm-10">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              name="name" [(ngModel)]="model2.name" 
+              placeholder="Enter a New Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="position" class="control-label col-sm-2">
+            Correo
+          </label>
+          <div class="col-sm-10">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="position" 
+              name="position" [(ngModel)]="model2.position" 
+              placeholder="Enter a New Position">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="office" class="control-label col-sm-2">
+            Edad
+          </label>
+          <div class="col-sm-10">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="office" 
+              name="office" [(ngModel)]="model2.office" 
+              placeholder="Enter a New Office">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <button
+              type="submit"
+              class="btn btn-success"
+              (click)="editarEmployee(model2._id)"
+            >
+            Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+      <button
+        type="submit"
+        class="btn btn-danger"
+        (click)="eliminarEmployees()"
+      >
+      Delete All
+      </button>
+    </div>
+  </div>
+
+<nav>
+  <ul>    
+    <!--<li><a routerLink="/app_component" routerLinkActive="active" ariaCurrentWhenActive="page">App Component</a></li> -->
+    <li><a routerLink="/about_component" routerLinkActive="active" ariaCurrentWhenActive="page">About Component</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
+</div>
